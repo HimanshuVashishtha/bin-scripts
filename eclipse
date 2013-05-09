@@ -1,0 +1,10 @@
+#!/bin/sh
+# using GDK_NATIVE_WINDOWS breaks unity scrollbars
+#export GDK_NATIVE_WINDOWS=1 
+# Set GC options
+export EOPTS="-vmargs -Xms128M -Xmx1024M -XX:PermSize=128M -XX:MaxPermSize=512M -XX:UseConcMarkSweepGC -XX:+ExplicitGCInvokesConcurrent"
+export TCHOME=/home/eli/toolchain
+export ECLIPSE_HOME=$TCHOME/eclipse
+export JAVA_HOME=/home/eli/toolchain/jdk1.6.0_32
+export PATH=$JAVA_HOME/bin:$PATH
+$ECLIPSE_HOME/eclipse $EOPT &> /dev/null

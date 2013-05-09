@@ -1,0 +1,13 @@
+#!/bin/bash
+. ~/dotbash
+i=0
+while (true)
+do
+    let "i += 1"
+    echo "RUN $i"
+    eval $*
+    if [ $? -ne 0 ]; then
+        echo "Command failed"
+        exit 1
+    fi
+done

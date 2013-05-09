@@ -1,0 +1,5 @@
+#!/bin/sh
+# 1 = drop pagecache
+# 2 = drop dentries and inodes 
+# 3 = drop all of the above
+sync ; echo 3 | sudo tee /proc/sys/vm/drop_caches
