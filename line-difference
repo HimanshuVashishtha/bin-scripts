@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+#
+# usage: line-difference <file1> <file2>
+#
+# Given two files where each represents a set, one item per line,
+# print the difference between the two sets, ie print all the lines in
+# file1 that are not in file2.
+#
+import sys
+from sets import Set
+
+def readSet(fileName):
+  s = Set()
+  f = open(fileName, 'r')
+  while True:
+    line = f.readline()
+    if not line:
+      break
+    s.add(line.rstrip())
+  return s
+
+def main():
+  if 3 != len(sys.argv):
+    sys.exit(1)
+  set1 = readSet(sys.argv[1])
+  set2 = readSet(sys.argv[2])
+  set1.difference_update(set2)
+  for item in set1:
+    print item
+  return 0
+
+
+if __name__ == "__main__":
+  sys.exit(main())
