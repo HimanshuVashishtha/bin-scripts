@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+#
+# Prints info for each jira reference (one per-line) on stdin.
+#
+import sys
+from urllib import urlopen
+from xml.etree import ElementTree
+
+def parseJira(jira):
+  xml = urlopen("http://issues.apache.org/jira/si/jira.issueviews:"+\
+                "issue-xml/%s/%s.xml" % (jira, jira))
+  return ElementTree.parse(xml)
+
+def main():
+  while True:
+    line = sys.stdin.readline()
+    if not line:
+      break
+
+    jira = line.rstrip()
+    try:
+      dom = parseJira(jira)
+    except ElementTree.ParseError:
+      print "ERROR " + jira
+      continue
+
+    jiraType = dom.find('./channel/item/type').text
+    summary = dom.find('./channel/item/summary').text
+
+    try:
+      print jiraType + " " + jira + " " + summary
+    except UnicodeEncodeError:
+      print "ERROR" + jira
+
+  return 0
+ 
+if __name__ == "__main__":
+  sys.exit(main())
