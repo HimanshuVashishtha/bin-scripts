@@ -24,11 +24,13 @@ def main():
       print "ERROR " + jira
       continue
 
+    # https://issues.apache.org/jira/si/jira.issueviews:issue-xml/HDFS-4350/HDFS-4350.xml
     jiraType = dom.find('./channel/item/type').text
     summary = dom.find('./channel/item/summary').text
+    #flags = dom.findall('./channel/item/customfields')
 
     try:
-      print jiraType + " " + jira + " " + summary
+      print jira + "$" + jiraType + "$" + summary
     except UnicodeEncodeError:
       print "ERROR" + jira
 
