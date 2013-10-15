@@ -13,11 +13,10 @@ def main():
     if not line:
       break
 
-    m = re.match(r".*[\s]([A-Z]+)[- ](\d+)(.*)", line)
-    if m:
+    patt = re.compile(r"[\s+]([A-Z]+)[- ](\d+)")
+    for m in patt.finditer(line):
       proj = m.group(1)
       num  = m.group(2)
-      summary = m.group(3)
       print proj+"-"+num
 
   return 0
